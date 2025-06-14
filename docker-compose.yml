@@ -1,0 +1,13 @@
+version: "3.8"
+
+services:
+  medibot:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+    volumes:
+      - ./backend/saved_skin_model:/app/backend/saved_skin_model
+      - ./backend/saved_xray_model:/app/backend/saved_xray_model
+    restart: unless-stopped
