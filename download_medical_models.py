@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Skin Model Download Script
-Downloads and saves a skin disease AI model (with fallback to general vision models)
+Downloads and saves a skin disease AI model
 """
 
 import os
@@ -65,13 +65,16 @@ def main():
     print("=" * 50)
     skin_save_path = create_directory("./backend/saved_skin_model")
 
+    # List of specialized skin disease models
     skin_models = [
-        "google/derm-foundation",        # Foundation model for dermatology (embeddings, requires terms acceptance)
+        "google/derm-foundation",        # Foundation model for dermatology (embeddings)
         "Eraly-ml/Skin-AI",             # Direct classifier, PyTorch scripted
         "Brucze-wayne/DermaAI",         # Image-to-text, SkinCAP
-        "microsoft/swin-tiny-patch4-window7-224",    # General vision fallback
-        "google/vit-base-patch16-224"                 # General vision fallback
+        "mattmdjaga/dermnet",           # DermNet trained model
+        "mattmdjaga/effnetb0-dermnet",  # EfficientNet trained on DermNet
+        "mattmdjaga/vit-dermnet"        # ViT trained on DermNet
     ]
+    
     skin_success = False
     skin_model_used = None
     for model_name in skin_models:
